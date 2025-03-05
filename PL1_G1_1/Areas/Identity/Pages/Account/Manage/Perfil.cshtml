@@ -1,0 +1,85 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<style>
+    body{
+        position: absolute;
+        color:white;
+        background-repeat:repeat-y;
+    }
+
+    .dados{
+        position:absolute;
+        left: 350px;
+        color: white;
+        background-color: cornflowerblue;
+        border: 2px solid grey;
+        border-radius: 35px;
+        font-size: 20px;
+        text-align:center
+    }
+
+    .grupos{
+        position: absolute;
+        overflow: auto;
+        left: 750px;
+        color: white;
+        background-color: cornflowerblue;
+        border: 2px solid grey;
+        font-size: 20px;
+        text-align: center;
+        height: 100px
+    }
+
+    .opcoes{
+        position: absolute;
+        left:1150px;
+        font-size:20px;
+        color: white;
+    }
+
+    .publicacoes{
+        color:white
+    }
+
+</style>
+
+<body>
+    <div>
+        <div class="row">
+            <div class="col-md-1">
+                <img src="~/Imagens/@Model.FotoPerfil" style="height:200px; width:200px; border-radius:15px" />
+            </div> 
+            <div class="dados">
+                <p>@User.Identity?.Name</p>
+                <p>Data de Nascimento: @Model.dtNascimento.ToShortDateString()</p>
+                <p>Morada: @Model.Morada</p>
+            </div>
+            <div class="grupos" style="white-space: pre-line">
+                 @foreach(var item in Model.idGrupos)
+                {
+                    @foreach(var item2 in Model.nomesGrupos)
+                    {
+                        <a asp-controller="Grupos" asp-action="Visualizar" asp-route-id="@item">@item2</a>
+                        <br />
+                    }
+                    
+                } 
+            </div>
+            <div class="opcoes">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/EditarPerfil">Editar Perfil</a>
+           
+            </div>
+        </div>
+    <br />
+    <br />
+        <a class="btn btn-info" asp-controller="Publicacoes" asp-action="VerPublicacoes">Voltar</a>
+    </div>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

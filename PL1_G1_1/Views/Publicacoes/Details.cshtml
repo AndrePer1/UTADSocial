@@ -1,0 +1,95 @@
+﻿@model PL1_G1_1.Models.Publicacao
+
+@{
+    ViewData["Title"] = "Details";
+}
+<style>
+    .details-container {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        color: white;
+    }
+
+    .details-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .details-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .details-item {
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="details-container">
+    <h1 class="details-title">@Html.DisplayFor(model => model.IdAutorNavigation.Username)</h1>
+
+    <div>
+        <h4>Publicação</h4>
+        <hr />
+        <dl class="row details-list">
+            <div class="details-item row">
+                <dt class="col-sm-2">Data de Publicação</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.DataPublicacao)</dd>
+            </div>
+            <div class="details-item row">
+                <dt class="col-sm-2">Tipo de Publicação</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.TipoPublicacao)</dd>
+            </div>
+            <div class="details-item row">
+                <dt class="col-sm-2">Autor</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.IdAutorNavigation.Username)</dd>
+            </div>
+            <div class="details-item row">
+                <dt class="col-sm-2">Conteúdo</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Conteudo)</dd>
+            </div>
+            <div class="details-item row">
+                <dt class="col-sm-2">imagem</dt>
+                <dd style="text-align: center;" class="col-sm-10">
+                    @if (Model.Midia != null && Model.Midia.Any())
+                    {
+
+                        var midiaDaPublicacao = Model.Midia.FirstOrDefault();
+
+                        if (midiaDaPublicacao != null)
+                        {
+                            <img src="~/Midia/@midiaDaPublicacao.Nome" style="max-width: 500px; max-height: 500px; margin-right: 5px;" />
+                        }
+                    }
+                    else
+                    {
+                        <a style="color:white">Não tem mídia associada</a>
+                    }
+
+                </dd>
+            </div>
+        </dl>
+    </div>
+
+    <div>
+        <a class="btn btn-primary" asp-action="VerPublicacoes">Voltar à lista</a>
+    </div>
+</div>
+<div class="details-container">
+    <h1 class="details-title">Secção de Comentários:</h1>
+   
+        <div class="form-group">
+            <label for="Comentario">Comentário:</label>
+            <textarea class="form-control" id="Comentario" name="Comentario" rows="3" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Adicionar Comentário</button>
+
+    <div>
+        <h3>Comentários existentes:</h3>
+        <ul>
+        </ul>
+    </div>
+ </div>

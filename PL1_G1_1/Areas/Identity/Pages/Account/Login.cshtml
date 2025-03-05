@@ -1,0 +1,80 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Bem-Vindo(a) à UTADSocial";
+}
+
+<style>
+    .div1{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+ 
+    .button {
+        margin: auto;
+        display: block;
+        height: 50px;
+        width: 250px;
+        color: white;
+        background-color: grey;
+        border: 2px solid grey;
+        border-radius: 35px;
+        font-size: 20px
+    }
+
+    .olho{
+        position: absolute;
+        right: 20px;
+        top: 17px;
+    }
+</style>
+
+<body>
+    <br/>
+    <br/>
+    <h1 style="color:white; text-align:center; font-size:50px">@ViewData["Title"]</h1>
+    <div1 class="div1">
+        <div class="col-md-4">
+            <section>
+                <form id="account" method="post">
+                    <hr />
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Username" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" style="border-radius:25px" />
+                        <label asp-for="Input.Username" class="form-label">Nome de utilizador</label>
+                        <span asp-validation-for="Input.Username" class="text-danger"></span>
+                    </div>
+                    <br/>
+                    <div class="form-floating mb-3">
+                        <input type="password" id="myPW" asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" style="border-radius:25px"/>
+                        <span id="btn" class="olho"><input icon="" type="checkbox" id="eye" onclick="if(myPW.type=='text')myPW.type='password'; else myPW.type='text';" /></span>
+                        <label asp-for="Input.Password" class="form-label">Password</label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div>
+                        <button id="login-submit" type="submit" class="button">Log in</button>
+                    </div>
+                    
+                </form>
+            </section>
+        </div>
+    </div1>
+    <br/>
+    <br/>
+    <div class="div1">
+        <a id="forgot-password" asp-page="./ForgotPassword">Esqueceste-te da Password?</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Criar uma conta</a>
+    </div>                
+       
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

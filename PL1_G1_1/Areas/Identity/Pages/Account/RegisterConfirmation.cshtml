@@ -1,0 +1,29 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Confirmação de resgisto";
+}
+
+<style>
+    body{
+        color:white;
+    }
+</style>
+
+<body>
+    <h1>@ViewData["Title"]</h1>
+    @{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+        <p>
+            Por favor confirma a tua conta acedendo ao link enviado por email.
+        </p>
+    }
+    else
+    {
+        <p>
+            Please check your email to confirm your account.
+        </p>
+    }
+}
+</body>

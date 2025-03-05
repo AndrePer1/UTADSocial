@@ -1,0 +1,56 @@
+﻿@model PL1_G1.Models.User
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<head>
+    <style>
+    body{
+        height: 100vh; /* 100% da altura da viewport (janela do navegador) */
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+        display:flex; /* Usa o modelo flexível para facilitar o alinhamento central vertical e horizontal */
+        background-image: url("/Imagens/fundo.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-size:xx-large
+    }
+</style>
+</head>
+
+
+<body>
+<h1 style="color: white ">Bem-Vindo(a) à UTADSocial</h1>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+            <label style="color: white" asp-for="Email" class="control-label" ></label>
+                <input asp-for="Email"  class="form-control"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label style="color: white" asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div>
+                <a asp-action="Index">Esqueceste-te da password ?</a>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary"/>
+            </div>
+   
+
+<div style="color: white">
+    Ainda não tens conta?
+    <a asp-action="Index">Regista-te</a>
+</div>
+
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<PL1_G1_1.Models.PedirAcesso>
+
+@{
+    ViewData["Title"] = "VerPedidosDeAcesso";
+}
+
+<style>
+    body{
+        color:white;
+    }
+</style>
+
+<body>
+    <h1>Pedidos De Acesso</h1>
+
+    <table style="color:white" class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataPedido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mensagem)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @foreach (var participante in ViewBag.Nome)
+                        {
+                            @participante
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataPedido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mensagem)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" data-ajax="true" data-ajax-method="post"
+                           data-ajax-mode="replace" asp-action="AceitarPedido" asp-route-idgrupo="@item.IdGrupo" asp-route-id="@item.IdAutenticado">Aceitar</a>
+                        <a style="background-color:red" class="btn btn-primary" data-ajax="true" data-ajax-method="post"
+                           data-ajax-mode="replace" asp-action="RecusarPedido" asp-route-idgrupo="@item.IdGrupo" asp-route-id="@item.IdAutenticado">Recusar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

@@ -1,0 +1,129 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Regista-te na UTADSocial";
+}
+
+<h1 style="color: white; text-align:center" >@ViewData["Title"]</h1>
+
+<style>
+    body{
+        background-image: url("/Imagens/fundo.png");
+        background-repeat: no-repeat;
+        background-size: cover
+    }
+    
+    .button1{
+        margin:auto;
+        display:block;
+        height: 50px;
+        width: 250px;
+        color: white;
+        background-color: grey;
+        border: 2px solid grey;
+        border-radius: 35px;
+        font-size: 20px
+    }
+    
+    .button2{
+        position:absolute;
+        right: 36px;
+        margin:auto;
+        display:block;
+        height:25px;
+        width:125px;
+        color:white;
+        background-color: grey;
+        border: 2px solid grey;
+        border-radius: 15px;
+        font-size: 15px;
+    }
+
+    .right-header{
+        position: absolute;
+        right: 250px;
+    }
+
+    .opcional{
+        position: absolute;
+        right:70px
+    }
+
+    .olho{
+        position: absolute;
+        right:-45px;
+        top:17px
+    }
+</style>
+
+
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+                <hr />
+                <div class="right-header">
+                    <img src="~/Imagens/userNoFoto.png" style="border-radius:25px" height="200" width="200" />
+                    <br />
+                    <br />
+                    <input asp-for="Input.FotoPerf" id="inserirFoto" type="file" name="FotoPerf" style="position:absolute; left:35px">
+                    <br />
+                    <h1 style="font-size:12px; color:white" class="opcional">(Opcional)</h1>
+                    <br />
+                    <br />
+                    <br />
+                    <div>
+                        <label asp-for="Input.dtNasc" style="color:white; font-size:20px">Data de Nascimento:</label>
+                        <input asp-for="Input.dtNasc" class="form-control" autocomplete="datanasc" aria-required="true" placeholder="datanasc" style="position:relative;" />
+                        <span asp-validation-for="Input.dtNasc" class="text-danger"></span>
+                    </div>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Username" class="form-control" autocomplete="username" aria-required="true" placeholder="username" style="border-radius:25px; margin-left:60px" />
+                    <label asp-for="Input.Username" style="margin-left:60px">Nome de Utilizador</label>
+                    <span asp-validation-for="Input.Username" class="text-danger"></span>
+                </div>
+                <BR/>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.nome_completo" class="form-control" autocomplete="nome_completo" aria-required="true" placeholder="username" style="border-radius:25px; margin-left:60px" />
+                    <label asp-for="Input.nome_completo" style="margin-left:60px">Nome Completo</label>
+                    <span asp-validation-for="Input.nome_completo" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="email" aria-required="true" placeholder="name@example.com" style="border-radius:25px; margin-left:60px" />
+                    <label asp-for="Input.Email" style="margin-left:60px">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Morada" class="form-control" autocomplete="username" aria-required="true" placeholder="morada" style="border-radius:25px; margin-left:60px" />
+                    <label asp-for="Input.Morada" style="margin-left:60px">Morada</label>
+                    <span asp-validation-for="Input.Morada" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-floating mb-3">
+                    <input type="password" id="myPW" asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" style="border-radius:25px; margin-left:60px"/>
+                    <span id="btn" class="olho"><input icon="" type="checkbox" id="eye" onclick="if(myPW.type=='text')myPW.type='password'; else myPW.type='text';"/></span>
+                    <label asp-for="Input.Password" style="margin-left:60px">Password</label>           
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-floating mb-3">
+                    <input type="password" id="checkPW" asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" style="border-radius:25px; margin-left:60px" />
+                    <span id="btn" class="olho"><input icon="" type="checkbox" id="eye" onclick="if(checkPW.type=='text')checkPW.type='password'; else checkPW.type='text';" /></span>
+                    <label asp-for="Input.ConfirmPassword" style="margin-left:60px">Confirmar Password</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <input id="registerSubmit" type="submit" class="button"/>
+            </form>
+        </div>
+    </div>
+    <br />
+</body>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<PL1_G1_1.Models.Grupo>
+
+@{
+    ViewData["Title"] = "VerGrupos";
+}
+
+<h1 style="color:white">Os Meus Grupos</h1>
+
+@* <p>
+    <a class="btn btn-primary" asp-action="Create">Criar um novo grupo</a>
+</p> *@
+<table style="color:white" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Acesso)
+            </th>
+            <th>
+                Data de Criação
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            @if(item.Acesso == true)
+                {
+                    <td>
+                        Público
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Privado
+                    </td>
+                }
+                <td>
+                @Html.DisplayFor(modelItem => item.DataCriacao)
+            </td>
+                @if (item.IdDono == ViewBag.idAutenticado && item.Acesso == false)
+                {
+                    <td>
+                        <a asp-action="Editar" asp-route-id="@item.IdGrupo" class="btn btn-warning">Editar</a> 
+                        <a asp-action="Visualizar" asp-route-id="@item.IdGrupo" class="btn btn-info">Visualizar</a> 
+                        <a asp-action="VerPedidosDeAcesso" asp-route-id="@item.IdGrupo">Pedidos de Acesso</a> 
+                    </td>
+                }
+                else if(item.IdDono == ViewBag.idAutenticado && item.Acesso == true)
+                {
+                    <td>
+                        <a asp-action="Editar" asp-route-id="@item.IdGrupo" class="btn btn-warning">Editar</a> 
+                        <a asp-action="Visualizar" asp-route-id="@item.IdGrupo" class="btn btn-info">Visualizar</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="Visualizar" asp-route-id="@item.IdGrupo" class="btn btn-info">Visualizar</a>
+                    </td>
+                }
+
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a class="btn btn-primary" asp-controller="Publicacoes" asp-action="VerPublicacoes">Voltar</a>
+</div>

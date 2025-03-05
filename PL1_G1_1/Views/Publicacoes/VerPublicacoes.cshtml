@@ -1,0 +1,170 @@
+﻿@model IEnumerable<PL1_G1_1.Models.Publicacao>
+
+@{
+    ViewData["Title"] = "Ver Publicações";
+}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+
+            .btn-container a {
+                text-align: center;
+                flex: 1;
+            }
+
+        .search-container {
+            margin-top: 10px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+            .search-container input[type="text"] {
+                width: 300px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            .search-container button {
+                padding: 10px;
+                border: 1px solid #007bff;
+                border-radius: 4px;
+                background-color: #007bff;
+                color: #fff;
+                cursor: pointer;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="btn-container">
+        <a href="@Url.Action("Create", "Publicacoes")" class="btn btn-primary btn-lg">
+            <img src="~/Icons/70310.png" alt="Ícone Personalizado" class="icone-customizado" /><br />
+            Criar Publicação
+        </a>
+
+        <a href="@Url.Action("Create", "Grupos")" class="btn btn-primary btn-lg">
+            <img src="~/icons/2522093.png" alt="Ícone de Grupo" class="icone-customizado" /><br />
+            Criar Grupo
+        </a>
+    </div>
+
+    <body>
+        <div class="search-container">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            {
+                <input type="text" name="searchTerm" placeholder="Procurar grupos" />
+                <button type="submit">Pesquisar</button>
+            }
+        </div>
+    </body>
+
+</body>
+
+<h1 style="color:white">Publicações</h1>
+
+@* <p>
+    <a asp-action="Create" class="btn btn-primary">Criar Publicação</a>
+</p>
+ *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <span class="text-white">
+                    @Html.DisplayName("Autor")
+                </span>
+            </th>
+            <th>
+                <span class="text-white">
+                    @Html.DisplayName("Data da Publicação")
+                </span>
+            </th>
+            <th>
+                <span class="text-white">
+                    @Html.DisplayName("Privacidade")
+                </span>
+            </th>
+            <th>
+                <span class="text-white">
+                    @Html.DisplayName("Conteúdo")
+                </span>
+            </th>
+            <th>
+                <span class="text-white">
+                    @Html.DisplayName("Mídia")
+                </span>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <span class="text-white">
+                        @Html.DisplayFor(modelItem => item.IdAutorNavigation.Username)
+                    </span>
+                </td>
+                <td>
+                    <span class="text-white">
+                        @Html.DisplayFor(modelItem => item.DataPublicacao)
+                    </span>
+                </td>
+                <td>
+                    <span class="text-white">
+                        @Html.DisplayFor(modelItem => item.TipoPublicacao)
+                    </span>
+                </td>
+                <td>
+                    <span class="text-white">
+                        @Html.DisplayFor(modelItem => item.Conteudo)
+                    </span>
+                </td>
+                <td>
+                    @if (item.Midia != null && item.Midia.Any())
+                    {
+                        var midiaDaPublicacao = item.Midia.FirstOrDefault();
+
+                        if (midiaDaPublicacao != null)
+                        {
+                            <img src="~/Midia/@midiaDaPublicacao.Nome" style="max-width: 100px; max-height: 100px; margin-right: 5px;" />
+                        }
+                    }
+                    else
+                    {
+                        <span style="color:white">Sem mídia associada</span>
+                    }
+                </td>
+                <td>
+                    @if (User.Identity.Name == item.IdAutorNavigation.Username)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.IdPublicacao" class="btn btn-warning">Editar</a>
+                        <a href="#" class="btn btn-danger" onclick="confirmDelete(@item.IdPublicacao)">Apagar</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.IdPublicacao" class="btn btn-info">Detalhes</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function confirmDelete(publicacaoId) {
+        if (confirm("Tem a certeza de que deseja excluir esta publicação?")) {
+            window.location.href = "/Publicacoes/Delete/" + publicacaoId;
+        }
+    }
+</script>
+
+

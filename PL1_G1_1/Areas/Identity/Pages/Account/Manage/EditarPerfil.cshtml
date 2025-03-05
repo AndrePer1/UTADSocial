@@ -1,0 +1,92 @@
+﻿@page
+@model EmailModel
+@{
+    ViewData["Title"] = "Manage Email";
+}
+
+<style>
+    body{
+        position:absolute;
+        color:white;
+    }
+
+    .caixas{
+        width:550px;
+        color:black;
+    }
+
+    .right-header {
+        position: absolute;
+        left: 1000px;
+    }
+</style>
+
+<h1>Atualiza o teu perfil</h1>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="email-form" method="post" class="caixas" enctype="multipart/form-data">
+            <div class="right-header">
+                <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+                <label asp-for="Foto" style="color:white; font-size:20px">Foto de Perfil:</label>
+                <div class="form-floating mb-3 input-group foto">
+                    <img src="~/Imagens/@Model.Foto" style="height:200px; width:200px; border-radius:15px" />
+                </div>
+                <div>
+                    <input asp-for="Input.FotoNova" type="file" name="FotoNova" class="form-control"/>
+                    <label asp-for="Input.FotoNova" class="form-label"></label>
+                    <span asp-validation-for="Input.FotoNova" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+            <label asp-for="Email" style="color:white; font-size:20px">Email:</label>
+                <div class="form-floating mb-3 input-group">
+                    <input asp-for="Email" class="form-control" placeholder="Coloca o teu email" disabled />
+                        <div class="input-group-append">
+                            <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                        </div>
+                    <label asp-for="Email" class="form-label"></label>
+                </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="Coloca o teu email." />
+                <label asp-for="Input.NewEmail" class="form-label"></label>
+                <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+            </div>
+            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+            <label asp-for="Morada" style="color:white; font-size:20px">Morada</label>
+                <div class="form-floating mb-3 input-group">
+                    <input asp-for="Morada" class="form-control" placeholder="Coloca a tua Morada" disabled />
+                    <div class="input-group-append">
+                        <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                    </div>
+                    <label asp-for="Morada" class="form-label"></label>
+                </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.NewMorada" class="form-control" autocomplete="email" aria-required="true" placeholder="Atualiza a tua morada" />
+                <label asp-for="Input.NewMorada" class="form-label"></label>
+                <span asp-validation-for="Input.NewMorada" class="text-danger"></span>
+            </div>
+            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+            <label asp-for="Nascimento" style="color:white; font-size:20px">Data de Nascimento:</label>
+            <div class="form-floating mb-3 input-group">
+                <input asp-for="Nascimento" class="form-control" placeholder="" disabled />
+                <div class="input-group-append">
+                    <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                </div>
+                <label asp-for="Nascimento" class="form-label"></label>
+            </div>
+            <div>
+                <input asp-for="Input.DataNova" class="form-control" autocomplete="datanasc" aria-required="true" placeholder="datanasc" style="position:relative;" />
+                <span asp-validation-for="Input.DataNova" class="text-danger"></span>
+            </div>
+            
+            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Confirmar alterações</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

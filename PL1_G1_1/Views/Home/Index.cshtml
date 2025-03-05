@@ -1,0 +1,42 @@
+﻿
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@* <head>
+    <div class="mb-3">
+        <a href="@Url.Action("Create", "Publicacoes")" class="btn btn-primary btn-lg">
+            <img src="~/Icons/70310.png" alt="Ícone Personalizado" class="icone-customizado" /><br />
+            Criar Publicação
+        </a>
+    </div>
+
+    <div>
+        <a href="@Url.Action("Create", "Grupos")" class="btn btn-primary btn-lg">
+            <img src="~/icons/2522093.png" alt="Ícone de Grupo" class="icone-customizado" /><br />
+            Criar Grupo
+        </a>
+    </div>
+</head>
+
+<div>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        <input type="text" name="searchTerm" placeholder="Procurar grupos" />
+    }
+</div> *@
+
+@if (TempData["Aviso"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Aviso"]
+        @if (TempData["Aviso"] == "Este Grupo é Privado. Solicite Acesso")
+        {
+            <a class="btn btn-primary" class="btn btn-primary" data-ajax="true" data-ajax-method="post"
+           data-ajax-mode="replace" asp-action="PedirAcesso" asp-route-searchTerm="@ViewBag.SearchTerm">Pedir Acesso</a>
+        } 
+    </div>
+}
+
+
+

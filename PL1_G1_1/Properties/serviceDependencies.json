@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+<<<<<<< HEAD:PL1_G1_1/Properties/serviceDependencies.json
+      "connectionId": "ConnectionStrings:DefaultConnection"
+=======
+      "connectionId": "ConnectionStrings:UtilizadoresContext"
+>>>>>>> origin/André:PL1_G1/Properties/serviceDependencies.json
+    }
+  }
+}
